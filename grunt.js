@@ -26,12 +26,11 @@ module.exports = function(grunt) {
       files: '<config:lint.files>',
       tasks: 'lint',
       test: {
-        files: [ 'js/**/*.js', 'test/spec/**/*.js' ],
+        files: [ 'lib/**/*.js', 'test/spec/**/*.js' ],
         tasks: 'mocha'
       }
     },
     mocha: {
-      // index: ['test/test.html'],
       all: [ 'test/**/*.html' ],
       run: true
     },
