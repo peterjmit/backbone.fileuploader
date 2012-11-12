@@ -11,6 +11,11 @@ module.exports = function(grunt) {
         '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
         'Peter Mitchell; Licensed MIT */'
     },
+    options: {
+      testFiles: [
+        'lib/**/*.js'
+      ]
+    },
     lint: {
       files: ['grunt.js', 'lib/**/*.js']
     },
@@ -26,7 +31,7 @@ module.exports = function(grunt) {
       }
     },
     mocha: {
-      index: ['test/test.html'],
+      // index: ['test/test.html'],
       all: [ 'test/**/*.html' ],
       run: true
     },
