@@ -12,21 +12,27 @@ module.exports = function(grunt) {
         'Peter Mitchell; Licensed MIT */'
     },
     lint: {
-      files: ['grunt.js', 'lib/**/*.js', 'test/spec/**/*.js']
+      files: ['grunt.js', 'lib/**/*.js']
     },
     test: {
-      files: ['test/spec/*.js']
-    },
-    mocha: {
-      all: [ 'test/**/*.html' ]
+      files: ['test/**/*.js']
     },
     watch: {
       files: '<config:lint.files>',
-      tasks: 'lint mocha'
+      tasks: 'lint',
+      test: {
+        files: [ 'js/**/*.js', 'test/spec/**/*.js' ],
+        tasks: 'mocha'
+      }
+    },
+    mocha: {
+      index: ['test/test.html'],
+      all: [ 'test/**/*.html' ],
+      run: true
     },
     concat: {
       dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:lib/FILE_NAME.js>'],
+        src: ['<banner:meta.banner>', '<file_strip_banner:lib/upload.js>'],
         dest: 'dist/upload.js'
       }
     },
@@ -55,12 +61,12 @@ module.exports = function(grunt) {
     uglify: {}
   });
 
-  grunt.loadNpmTasks('grunt-mocha');
 
   // Alias 'test' to 'mocha' so you can run `grunt test`
-  task.registerTask('test', 'mocha');
+  grunt.registerTask('test', 'mocha');
 
   // Default task.
-  grunt.registerTask('default', 'lint qunit concat min');
+  grunt.registerTask('default', 'lint mocha concat min');
 
+  grunt.loadNpmTasks('grunt-mocha');
 };
