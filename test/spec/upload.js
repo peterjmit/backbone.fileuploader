@@ -1,7 +1,17 @@
 describe('Upload', function() {
+  beforeEach(function() {
+    this.uploader = new Uploader();
+  });
 
-    it('should be initalizable', function() {
-        // expect(this.apple).property('sound', 'crunch');
-    });
+  afterEach(function() {
+    delete this.uploader;
+  });
 
+  it('should be defined as a global', function() {
+    expect(window).to.have.property('Uploader');
+  });
+
+  it('should have a settings object', function() {
+    expect(this.uploader.settings).to.be.a('object');
+  });
 });

@@ -1,6 +1,5 @@
 /*global module:false*/
 module.exports = function(grunt) {
-
   // Project configuration.
   grunt.initConfig({
     meta: {
@@ -11,28 +10,22 @@ module.exports = function(grunt) {
         '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
         'Peter Mitchell; Licensed MIT */'
     },
-    options: {
-      testFiles: [
-        'lib/**/*.js'
-      ]
-    },
     lint: {
       files: ['grunt.js', 'lib/**/*.js']
-    },
-    test: {
-      files: ['test/**/*.js']
     },
     watch: {
       files: '<config:lint.files>',
       tasks: 'lint',
       test: {
-        files: [ 'lib/**/*.js', 'test/spec/**/*.js' ],
+        files: ['index.html', 'lib/**/*.js', 'test/spec/**/*.js', 'test/**/*.html'],
         tasks: 'mocha'
       }
     },
     mocha: {
-      all: [ 'test/**/*.html' ],
-      run: true
+      all: {
+        src: ['test/**/*.html'],
+        run: true
+      }
     },
     concat: {
       dist: {
@@ -64,7 +57,6 @@ module.exports = function(grunt) {
     },
     uglify: {}
   });
-
 
   // Alias 'test' to 'mocha' so you can run `grunt test`
   grunt.registerTask('test', 'mocha');
