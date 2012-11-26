@@ -1,0 +1,22 @@
+{
+  "name": "upload.js",
+  "version": "0.1.0",
+  "description": "upload.js =========",
+  "main": "index.html",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "grunt-mocha": "~0.1.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/peterjmit/upload.js.git"
+  },
+  "author": "Peter Mitchell",
+  "license": "MIT"
+}
