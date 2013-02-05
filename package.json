@@ -5,14 +5,10 @@
   "version": "0.0.1",
   "description": "A backbone view wrapper around html5 file APIs",
   "dependencies": {
-    "backbone": "~0.9",
-    "underscore": "~1.4"
   },
   "devDependencies": {
     "grunt": "~0.4.0",
     "grunt-mocha": "~0.2.1",
-    "chai": "~1.5.0",
-    "mocha": "~1.8.1",
     "grunt-contrib-jshint": "~0.1.0",
     "grunt-contrib-uglify": "~0.1.1rc6"
   },
