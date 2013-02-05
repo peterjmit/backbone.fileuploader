@@ -28,18 +28,10 @@ module.exports = ->
         options:
           run: true
 
-
-    concat:
-      dist:
-        src: ['<banner:meta.banner>', '<file_strip_banner:lib/upload.js>']
-        dest: 'dist/upload.js'
-
-
     min:
       dist:
-        src: ['<banner:meta.banner>', '<config:concat.dist.dest>']
-        dest: 'dist/upload.min.js'
-
+        src: ['<banner:meta.banner>', '<file_strip_banner:lib/upload.js>']
+        dest: 'lib/upload.min.js'
 
     jshint:
       options:
@@ -65,6 +57,6 @@ module.exports = ->
   @registerTask 'test', 'mocha'
 
   # Default task.
-  @registerTask 'default', ['lint', 'mocha', 'concat', 'min']
+  @registerTask 'default', ['lint', 'test', 'min']
 
   @loadNpmTasks 'grunt-mocha'
