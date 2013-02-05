@@ -5,14 +5,11 @@ module.exports = ->
   @initConfig
     meta:
       version: '0.0.1'
-      banner: '/*! upload.js - v<%= meta.version %> - ' +
+      banner: '/*! backbone.fileuploader - v<%= meta.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '* http://peterjmit/upload.js\n' +
+        '* https://github.com/peterjmit/backbone.fileuploader\n' +
         '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
-        'Peter Mitchell; Licensed MIT */'
-
-    lint:
-      files: ['grunt.js', 'lib/**/*.js']
+        'Peter Mitchell <peterjmit@gmail.com>; Licensed MIT */'
 
     watch:
       files: '<config:lint.files>'
@@ -20,7 +17,6 @@ module.exports = ->
       test:
         files: ['index.html', 'lib/**/*.js', 'test/spec/**/*.js', 'test/**/*.html']
         tasks: 'mocha'
-
 
     mocha:
       all:
@@ -34,7 +30,11 @@ module.exports = ->
         dest: 'lib/upload.min.js'
 
     jshint:
+      all: ['lib/**/*.js', 'test/spec/**/*.js']
       options:
+        globals:
+          describe: true
+          global: true
         curly: true
         eqeqeq: true
         immed: true
@@ -47,7 +47,6 @@ module.exports = ->
         eqnull: true
         browser: true
 
-      # globals:
 
 
     # uglify:
@@ -57,6 +56,7 @@ module.exports = ->
   @registerTask 'test', 'mocha'
 
   # Default task.
-  @registerTask 'default', ['lint', 'test', 'min']
+  @registerTask 'default', ['jshint', 'test', 'min']
 
   @loadNpmTasks 'grunt-mocha'
+  @loadNpmTasks 'grunt-contrib-jshint'
