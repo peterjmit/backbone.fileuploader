@@ -23,7 +23,7 @@ module.exports = ->
             'lib/<%= pkg.name %>.min.js': ['lib/<%= pkg.name %>.js']
 
     jshint:
-      all: ['lib/**/*.js', 'test/spec/**/*.js']
+      all: ['lib/<%= pkg.name %>.js', 'test/spec/**/*.js']
       options:
         globals:
           describe: true
