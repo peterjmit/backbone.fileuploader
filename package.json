@@ -1,15 +1,17 @@
 {
   "name": "upload.js",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "upload.js =========",
   "main": "index.html",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "grunt-mocha": "~0.1.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-mocha": "~0.2.1"
+  },
   "scripts": {
     "test": "grunt test"
   },
