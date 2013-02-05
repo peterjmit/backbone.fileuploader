@@ -3,20 +3,7 @@ module.exports = ->
 
   # Project configuration.
   @initConfig
-    meta:
-      version: '0.0.1'
-      banner: '/*! backbone.fileuploader - v<%= meta.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '* https://github.com/peterjmit/backbone.fileuploader\n' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
-        'Peter Mitchell <peterjmit@gmail.com>; Licensed MIT */'
-
-    watch:
-      files: '<config:lint.files>'
-      tasks: 'lint'
-      test:
-        files: ['index.html', 'lib/**/*.js', 'test/spec/**/*.js', 'test/**/*.html']
-        tasks: 'mocha'
+    pkg: @file.readJSON 'package.json'
 
     mocha:
       all:
@@ -24,10 +11,16 @@ module.exports = ->
         options:
           run: true
 
-    min:
+    uglify:
+      options:
+        banner:'/*!\n' +
+          ' * <%= pkg.name %>.js v<%= pkg.version %>\n' +
+          ' * Copyright <%= grunt.template.today("yyyy") %>, <%= pkg.author %>\n' +
+          ' * <%= pkg.name %>.js may be distributed under the <%= pkg.license %> licence\n' +
+          ' */\n'
       dist:
-        src: ['<banner:meta.banner>', '<file_strip_banner:lib/upload.js>']
-        dest: 'lib/upload.min.js'
+        files:
+            'lib/<%= pkg.name %>.min.js': ['lib/<%= pkg.name %>.js']
 
     jshint:
       all: ['lib/**/*.js', 'test/spec/**/*.js']
@@ -47,16 +40,16 @@ module.exports = ->
         eqnull: true
         browser: true
 
-
-
     # uglify:
 
 
   # Alias 'test' to 'mocha' so you can run `grunt test`
   @registerTask 'test', 'mocha'
+  @registerTask 'min', 'uglify'
 
   # Default task.
   @registerTask 'default', ['jshint', 'test', 'min']
 
   @loadNpmTasks 'grunt-mocha'
   @loadNpmTasks 'grunt-contrib-jshint'
+  @loadNpmTasks 'grunt-contrib-uglify'
