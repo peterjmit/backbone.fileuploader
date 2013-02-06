@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Upload.js</title>
+    <link rel="stylesheet" href="css/mocha.css" type="text/css" charset="utf-8" />
+
+    <!-- jQuery -->
+    <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/backbone.js"></script>
+</head>
+<body>
+  <!-- Required for browser reporter -->
+  <div id="mocha"></div>
+
+  <!-- mocha -->
+  <script src="js/mocha.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+      // This will be overridden by mocha-helper if you run with grunt
+      mocha.setup('bdd');
+  </script>
+
+  <!-- chai + chai-jquery -->
+  <script src="js/chai.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/chai-jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    // Setup chai
+    var expect = chai.expect;
+  </script>
+
+  <!-- Upload lib -->
+  <script src="../lib/upload.js" type="text/javascript" charset="utf-8"></script>
+
+  <!-- Specs -->
+  <script src="spec/setup.js" type="text/javascript" charset="utf-8"></script>
+
+  <script type="text/javascript" charset="utf-8">
+    // If tests run in a real browser
+    if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+      mocha
+        .globals(['Uploader'])
+        .run();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>backbone.fileuploader example usage</title>
+
+    <style type="text/css">
+      body {
+        margin: 20px auto;
+        width: 980px;
+        font-family: sans-serif;
+      }
+      .drop-area {
+        width: 400px;
+        height: 40px;
+        border: 3px dashed #DDD;
+        margin: 40px 0;
+        text-align: center;
+        color: #DDD;
+        text-transform: capitalize;
+        padding: 50px 0;
+        font-size:2em;
+      }
+      .drop-area:after {
+        content: 'Drop files here...'
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>backbone.fileuploader example</h1>
+
+    <script src="test/js/jquery-1.9.1.js"></script>
+    <script src="test/js/underscore.js"></script>
+    <script src="test/js/backbone.js"></script>
+    <script src="lib/backbone.fileuploader.js"></script>
+
+    <script type="text/x-underscore-tmpl" id="file-template">
+    <p data-cid="<%= cid %>">
+      <%= name %>
+      <button class="upload">Upload</button>
+      <button class="remove">Remove</button>
+    </p>
+    </script>
+
+    <script type="text/javascript">
+      var fileTmpl = _.template($('#file-template').html().trim());
+
+      var Uploader = Backbone.FileUploader.View.extend({
+        events: {
+          'click button.upload': 'doUpload',
+          'click button.remove': 'removeFile'
+        },
+
+        initialize: function() {
+          this.listenTo(this.collection, 'add', this.addFile);
+          this.listenTo(this.collection, 'change:data', this.addImageData);
+        },
+
+        doUpload: function() {
+          var $el = $(evt.target).parent('p'),
+            cid = $el.data('cid'),
+            file = this.collection.get(cid);
+
+          // TODO
+        },
+
+        addFile: function(file) {
+          var html = fileTmpl({
+            cid: file.cid,
+            name: file.get('name')
+          });
+
+          this.$el.append(html);
+        },
+
+        // Take the file out of the DOM and collection
+        removeFile: function(evt) {
+          var $el = $(evt.target).parent('p'),
+            cid = $el.data('cid'),
+            file = this.collection.get(cid);
+
+          file.destroy();
+
+          $el.remove();
+        },
+
+        addImageData: function(file, data) {
+          var $fileEl = this.$el.find('p[data-cid=' + file.cid + ']');
+
+          $fileEl.prepend('<img width="50" src="' + data + '" />');
+        }
+      });
+
+      var uploader = new Uploader({
+        collection: new Backbone.FileUploader.Collection()
+      });
+
+      $(document).ready(function () {
+        uploader.render(function() {
+            $('body').append(uploader.el);
+        });
+      });
+    </script>
+  </body>
+</html>
