@@ -55,13 +55,18 @@
         initialize: function() {
           this.listenTo(this.collection, 'add', this.addFile);
           this.listenTo(this.collection, 'change:data', this.addImageData);
+          this.listenTo(this.collection, 'change:uploadProgress', this.updateProgress);
         },
 
-        doUpload: function() {
+        doUpload: function(evt) {
           var $el = $(evt.target).parent('p'),
             cid = $el.data('cid'),
             file = this.collection.get(cid);
 
+          file.upload();
+        },
+
+        updateProgress: function(file) {
           // TODO
         },
 
@@ -80,9 +85,12 @@
             cid = $el.data('cid'),
             file = this.collection.get(cid);
 
-          file.destroy();
+          file.destroy({
+            success: function () {
+              $el.remove();
+            }
+          });
 
-          $el.remove();
         },
 
         addImageData: function(file, data) {
