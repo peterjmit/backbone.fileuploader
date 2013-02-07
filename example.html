@@ -63,7 +63,7 @@
             cid = $el.data('cid'),
             file = this.collection.get(cid);
 
-          file.upload();
+          file.save();
         },
 
         updateProgress: function(file) {
@@ -86,11 +86,11 @@
             file = this.collection.get(cid);
 
           file.destroy({
-            success: function () {
+            wait: true,
+            success: function() {
               $el.remove();
             }
           });
-
         },
 
         addImageData: function(file, data) {
