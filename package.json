@@ -2,7 +2,7 @@
   "author": "Peter Mitchell (@peterjmit)",
   "name": "backbone.fileuploader",
   "homepage": "https://github.com/peterjmit/backbone.fileuploader",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A backbone view wrapper around html5 file APIs",
   "dependencies": {
   },
