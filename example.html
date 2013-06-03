@@ -100,13 +100,17 @@
         }
       });
 
+      var collection = Backbone.FileUploader.Collection.extend({
+        url: 'http://example.com/upload'
+      });
+
       var uploader = new Uploader({
-        collection: new Backbone.FileUploader.Collection()
+        collection: new collection()
       });
 
       $(document).ready(function () {
         uploader.render(function() {
-            $('body').append(uploader.el);
+          $('body').append(uploader.el);
         });
       });
     </script>
